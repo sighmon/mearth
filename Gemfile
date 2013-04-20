@@ -9,6 +9,7 @@ gem 'rails', '3.2.13'
 
 # Postgres gem
 gem 'pg'
+gem 'rmagick', :require => false
 
 # TODO: Globe
 # https://github.com/bogwro/cesium
