@@ -61,6 +61,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.22)
     multi_json (1.7.2)
+    nokogiri (1.5.9)
     pg (0.15.1)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -136,6 +137,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   jquery-rails
   less-rails
+  nokogiri
   pg
   rails (= 3.2.13)
   retina_image_tag
