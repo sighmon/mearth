@@ -9,7 +9,12 @@ gem 'rails', '3.2.13'
 
 # Postgres gem
 gem 'pg'
+
+# for generating debug image
 gem 'rmagick', :require => false
+
+# for parsing mars weather data
+gem 'nokogiri'
 
 # TODO: Globe
 # https://github.com/bogwro/cesium
