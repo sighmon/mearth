@@ -8,13 +8,20 @@ class HomeController < ApplicationController
       return celcius+273
     end
 
+    #parse mars weather data
+    mars_wx = Nokogiri.XML(open("http://cab.inta-csic.es/rems/rems_weather.xml"))
+
+    @mars_min = celcius_to_kelvin(mars_wx.at_xpath("//min_temp").text.to_f)
+    @mars_max = celcius_to_kelvin(mars_wx.at_xpath("//max_temp").text.to_f)
+
+    @mars_atmo = mars_wx.at_xpath("//atmo_opacity").text
+    @mars_wind_speed = mars_wx.at_xpath("//wind_speed").text.to_f
+
     cities = JSON.parse(open("http://openweathermap.org/data/2.1/find/city?format=json&bbox=-180,-90,180,90").read)
   
     min = cities["list"].min{|a,b| (a["main"].try(:[],"temp_min").to_f) <=> (b["main"].try(:[],"temp_min").to_f)}["main"]["temp_min"].to_f
     max = cities["list"].max{|a,b| (a["main"].try(:[],"temp_max").to_f) <=> (b["main"].try(:[],"temp_max").to_f)}["main"]["temp_max"].to_f
 
-    @mars_min = celcius_to_kelvin(-69)
-    @mars_max = celcius_to_kelvin(3)
  
     @mars_avg = (@mars_min+@mars_max)/2.0
 
