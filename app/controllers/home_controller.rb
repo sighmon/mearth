@@ -8,8 +8,20 @@ class HomeController < ApplicationController
       return celcius+273
     end
 
+    def get_mars_wx
+      Rails.cache.fetch("mars_wx",:expires_in => 5.minutes) do
+        open("http://cab.inta-csic.es/rems/rems_weather.xml").read
+      end
+    end
+
+    def get_cities_wx
+      Rails.cache.fetch("cities_wx",:expires_in => 5.minutes) do
+        open("http://openweathermap.org/data/2.1/find/city?format=json&bbox=-180,-90,180,90").read
+      end
+    end
+
     #parse mars weather data
-    mars_wx = Nokogiri.XML(open("http://cab.inta-csic.es/rems/rems_weather.xml"))
+    mars_wx = Nokogiri.XML(get_mars_wx)
 
     @mars_min = celcius_to_kelvin(mars_wx.at_xpath("//min_temp").text.to_f)
     @mars_max = celcius_to_kelvin(mars_wx.at_xpath("//max_temp").text.to_f)
@@ -17,7 +29,7 @@ class HomeController < ApplicationController
     @mars_atmo = mars_wx.at_xpath("//atmo_opacity").text
     @mars_wind_speed = mars_wx.at_xpath("//wind_speed").text.to_f
 
-    cities = JSON.parse(open("http://openweathermap.org/data/2.1/find/city?format=json&bbox=-180,-90,180,90").read)
+    cities = JSON.parse(get_cities_wx)
   
     min = cities["list"].min{|a,b| (a["main"].try(:[],"temp_min").to_f) <=> (b["main"].try(:[],"temp_min").to_f)}["main"]["temp_min"].to_f
     max = cities["list"].max{|a,b| (a["main"].try(:[],"temp_max").to_f) <=> (b["main"].try(:[],"temp_max").to_f)}["main"]["temp_max"].to_f
