@@ -31,6 +31,8 @@ class HomeController < ApplicationController
       dist(a) <=> dist(b)
     end
 
+    @closest_avg = avg(@closest)
+  
     #logger.info(@closest)
 
     height = cities["list"].length
