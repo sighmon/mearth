@@ -8,21 +8,29 @@
 	</p> -->
 </div>
 <div class="row-fluid">
-  <div class="span6 planet">
+  <div class="span4 planet">
   	<h3 class="mars">Mars</h3>
-  	<p class="temperature"><%= (@mars_max-273).to_i %>&deg;</p>
+  	<p class="temperature"><%= number_with_precision (@mars_max-273), :precision => 1 %>&deg;</p>
   	<p class="temperature-description"><%= @mars_atmo %></p>
   	<p class="location"><a href="http://mars.jpl.nasa.gov/msl/mission/whereistherovernow/">Curiosity</a></p>
   	<p class="wind-speed"><%= @mars_wind_speed %></p>
-  	<%= retina_image_tag 'nasa-logo.png', :size => "200x170" %>
+  	<%= retina_image_tag 'nasa-logo.png', :size => "125x106" %>
   </div>
-  <div class="span6 planet">
+  <div class="span4 planet">
   	<h3 class="earth">Earth</h3>
-  	<p class="temperature"><%= (@closest_avg-273).to_i %>&deg;</p>
+  	<p class="temperature"><%= number_with_precision (@closest_avg-273), :precision => 1 %>&deg;</p>
   	<p class="temperature-description"><%= @closest["weather"].first["description"] %></p>
   	<p class="location"><%= link_to @closest["name"], "#myModal", :"data-toggle" => 'modal' %></p>
   	<p class="wind-speed"><%= @closest["wind"]["speed"] %> km/h</p>
-  	<%= retina_image_tag 'nasa-logo.png', :size => "200x170" %>
+  	<%= retina_image_tag 'nasa-logo.png', :size => "125x106" %>
+  </div>
+  <div class="span4 planet">
+  	<h3 class="local">Local</h3>
+  	<p class="temperature">0&deg;</p>
+  	<p class="temperature-description">xxx</p>
+  	<p class="location">xxx</p>
+  	<p class="wind-speed">xxx</p>
+  	<%= retina_image_tag 'nasa-logo.png', :size => "125x106" %>
   </div>
 </div>
 <!-- Google maps modal -->
