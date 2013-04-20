@@ -1,5 +1,25 @@
 <h1>Mearth</h1>
 <h2>Weather on Mars vs Weather on Earth</h2>
-<p>A 2013 NASA SpaceApps Challenge comparing the temperature, pressure &amp; wind speed on Mars and tries to match it with somewhere on Earth.</p>
-<hr />
-<p>More soon...</p>
+<p>A 2013 NASA <a href="http://spaceappschallenge.org/project/mearth/">SpaceApps Challenge</a> comparing the temperature, pressure &amp; wind speed on Mars and tries to match it with somewhere on Earth.</p>
+<p>
+  <button class="btn btn-primary" type="button">My location</button>
+  <button class="btn" type="button">Choose based on temperature</button>
+</p>
+<div class="row-fluid">
+  <div class="span6">
+  	<h2>Mars</h2>
+  	<p class="temperature">9 &deg;</p>
+  	<p class="temperature-description">Heavy snow</p>
+  	<p class="location">location</p>
+  	<p class="wind-speed">8 km/h</p>
+  	<%= retina_image_tag 'nasa-logo.png', :size => "200x170" %>
+  </div>
+  <div class="span6">
+  	<h2>Earth</h2>
+  	<p class="temperature">9 &deg;</p>
+  	<p class="temperature-description">Heavy snow</p>
+  	<p class="location">location</p>
+  	<p class="wind-speed">8 km/h</p>
+  	<%= retina_image_tag 'nasa-logo.png', :size => "200x170" %>
+  </div>
+</div>

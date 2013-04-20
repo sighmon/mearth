@@ -33,4 +33,6 @@ See progress at:
 
 Based on the challenge [Wish you were here](http://spaceappschallenge.org/challenge/wish-you-were-here/).
 
+SpaceApps project page: [Mearth](http://spaceappschallenge.org/project/mearth/)
+
 Built by the team in Adelaide, Australia.

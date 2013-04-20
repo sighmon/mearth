@@ -18,6 +18,10 @@ gem 'pg'
 # http://railscasts.com/episodes/380-memcached-dalli
 # gem 'dalli'
 
+# RetinaImageTag for retina display support
+# https://github.com/ffaerber/retina_image_tag
+gem 'retina_image_tag'
+
 # Twitter Bootstrap Rails gem
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
