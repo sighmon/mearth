@@ -1,6 +1,6 @@
 <div class="header">
 	<h1>Mearth</h1>
-	<h2>Weather on Mars vs Weather on Earth</h2>
+	<h2>Where on Earth is the temperature similar to Mars?</h2>
 	<p>A 2013 NASA <a href="http://spaceappschallenge.org/project/mearth/">SpaceApps Challenge</a> comparing the temperature, pressure &amp; wind speed on Mars and tries to match it with somewhere on Earth.</p>
 	<!-- <p>
 	  <button class="btn btn-primary" type="button">My location</button>
@@ -10,19 +10,26 @@
 <div class="row-fluid">
   <div class="span6 planet">
   	<h3 class="mars">Mars</h3>
-  	<p class="temperature">9&deg;</p>
-  	<p class="temperature-description">Heavy snow</p>
-  	<p class="location">location</p>
-  	<p class="wind-speed">8 km/h</p>
+  	<p class="temperature"><%= (@mars_max-273).to_i %>&deg;</p>
+  	<p class="temperature-description"><%= @mars_atmo %></p>
+  	<p class="location"><a href="http://mars.jpl.nasa.gov/msl/mission/whereistherovernow/">Curiosity</a></p>
+  	<p class="wind-speed"><%= @mars_wind_speed %></p>
   	<%= retina_image_tag 'nasa-logo.png', :size => "200x170" %>
   </div>
   <div class="span6 planet">
   	<h3 class="earth">Earth</h3>
-  	<p class="temperature">9&deg;</p>
-  	<p class="temperature-description">Heavy snow</p>
-  	<p class="location">location</p>
-  	<p class="wind-speed">8 km/h</p>
+  	<p class="temperature"><%= (@closest_avg-273).to_i %>&deg;</p>
+  	<p class="temperature-description"><%= @closest["weather"].first["description"] %></p>
+  	<p class="location"><%= link_to @closest["name"], "#myModal", :"data-toggle" => 'modal' %></p>
+  	<p class="wind-speed"><%= @closest["wind"]["speed"] %> km/h</p>
   	<%= retina_image_tag 'nasa-logo.png', :size => "200x170" %>
   </div>
 </div>
-<img src="data:image/jpeg;base64,<%= @data_uri %>">
+<!-- Google maps modal -->
+<div id="myModal" class="modal hide fade">
+  <div class="modal-body">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  	<iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @closest["coord"]["lat"] %>,<%= @closest["coord"]["lon"] %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @closest["coord"]["lat"] %>,<%= @closest["coord"]["lon"] %>&amp;output=embed"></iframe>
+  </div>
+</div>
+<!-- <img src="data:image/jpeg;base64,<%# @data_uri %>"> -->

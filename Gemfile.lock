@@ -139,6 +139,7 @@ DEPENDENCIES
   pg
   rails (= 3.2.13)
   retina_image_tag
+  rmagick
   sass-rails (~> 3.2.3)
   therubyracer
   twitter-bootstrap-rails
