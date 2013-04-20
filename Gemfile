@@ -10,6 +10,14 @@ gem 'rails', '3.2.13'
 # Postgres gem
 gem 'pg'
 
+# TODO: Globe
+# https://github.com/bogwro/cesium
+# gem 'cesium'
+
+# Dalli gem for memchached
+# http://railscasts.com/episodes/380-memcached-dalli
+# gem 'dalli'
+
 # Twitter Bootstrap Rails gem
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
