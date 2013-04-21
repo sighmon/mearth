@@ -19,7 +19,7 @@
   </div>
   <div class="span4 planet">
   	<h3 class="earth">Earth</h3>
-  	<p class="temperature"><%= number_with_precision (@closest.average_temperature-273.15), :precision => 1 %>&deg;</p>
+  	<p class="temperature"><%= number_with_precision (@closest.maximum_temperature-273.15), :precision => 1 %>&deg;</p>
   	<p class="temperature-description"><%= @closest.description.titleize %></p>
   	<p class="location"><%= link_to @closest.name, "#earthModal", :"data-toggle" => 'modal' %></p>
   	<p class="wind-speed"><%= number_with_precision @closest.wind_speed/1000*3600, :precision => 1 %> km/h</p>
