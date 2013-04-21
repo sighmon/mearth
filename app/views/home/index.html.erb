@@ -19,10 +19,10 @@
   </div>
   <div class="span4 planet">
   	<h3 class="earth">Earth</h3>
-  	<p class="temperature"><%= number_with_precision (@closest.maximum_temperature-273.15), :precision => 1 %>&deg;</p>
-  	<p class="temperature-description"><%= @closest.description.titleize %></p>
-  	<p class="location"><%= link_to @closest.name, "#earthModal", :"data-toggle" => 'modal' %></p>
-  	<p class="wind-speed"><%= number_with_precision @closest.wind_speed/1000*3600, :precision => 1 %> km/h</p>
+  	<p class="temperature"><%= number_with_precision (@closest_wx.maximum_temperature-273.15), :precision => 1 %>&deg;</p>
+  	<p class="temperature-description"><%= @closest_wx.description.titleize %></p>
+  	<p class="location"><%= link_to @closest_wx.name, "#earthModal", :"data-toggle" => 'modal' %></p>
+  	<p class="wind-speed"><%= number_with_precision @closest_wx.wind_speed/1000*3600, :precision => 1 %> km/h</p>
   	<%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
   </div>
   <div class="span4 planet">
@@ -38,7 +38,7 @@
 <div id="earthModal" class="modal hide fade">
   <div class="modal-body">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  	<iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @closest.latitude %>,<%= @closest.longitude %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @closest.latitude %>,<%= @closest.longitude %>&amp;output=embed"></iframe>
+  	<iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @closest_wx.latitude %>,<%= @closest_wx.longitude %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @closest_wx.latitude %>,<%= @closest_wx.longitude %>&amp;output=embed"></iframe>
   </div>
 </div>
 <div id="localModal" class="modal hide fade">

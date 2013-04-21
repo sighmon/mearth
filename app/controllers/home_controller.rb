@@ -51,14 +51,7 @@ class HomeController < ApplicationController
     min = gwr.weather_reports.min{|a,b| a.minimum_temperature <=> b.minimum_temperature}
     max = gwr.weather_reports.max{|a,b| a.maximum_temperature <=> b.maximum_temperature}
 
-    @closest = gwr.weather_reports.min do |a,b| 
-
-      def dist(city)
-        return (city.maximum_temperature-@mars_wx.maximum_temperature).abs
-      end
-
-      dist(a) <=> dist(b)
-    end
+    @closest_wx = gwr.weather_reports.sort_by{|r| (r.maximum_temperature-@mars_wx.maximum_temperature).abs}.first
   
     #logger.info(@closest)
 
