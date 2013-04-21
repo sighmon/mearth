@@ -18,12 +18,13 @@ class HomeController < ApplicationController
                     :site_name => "Mearth"
 	}
 
-	user_location = Geokit::Geocoders::IpGeocoder.geocode('8.8.8.8') #request.remote_ip
+	# logger.info request.remote_ip
+	user_location = Geokit::Geocoders::IpGeocoder.geocode(request.remote_ip) #request.remote_ip
 	# logger.info user_location
 
 	local_openweather_api = open("http://api.openweathermap.org/data/2.1/find/city?lat=#{user_location.lat}&lon=#{user_location.lng}&cnt=1").read
 	@local_wx = JSON.parse(local_openweather_api)
-	logger.info @local_wx
+	# logger.info @local_wx
 
     def celcius_to_kelvin(celcius)
       return celcius+273
