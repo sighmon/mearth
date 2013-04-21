@@ -16,6 +16,12 @@ gem 'rmagick', :require => false
 # for parsing mars weather data
 gem 'nokogiri'
 
+# Google Analytics https://github.com/bgarret/google-analytics-rails
+gem 'google-analytics-rails'
+
+# Using meta-tags for head meta https://github.com/kpumuk/meta-tags
+gem 'meta-tags', :require => 'meta_tags'
+
 # TODO: Globe
 # https://github.com/bogwro/cesium
 # gem 'cesium'
