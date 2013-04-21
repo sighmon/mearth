@@ -6,7 +6,7 @@ A 2013 NASA SpaceApps Challenge observing the temperature, pressure & wind speed
 See progress at:
 [mearthapp.heroku.com](http://merthapp.heroku.com)
 
-!(Our test app)[http://sighmon.com/pics/mearth-screenshot.png]
+![Our test app](http://sighmon.com/pics/mearth-screenshot.png)
 
 ## Data to compare
 
