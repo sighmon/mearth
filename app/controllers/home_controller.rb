@@ -5,10 +5,6 @@ require 'RMagick'
 class HomeController < ApplicationController
   def index
 
-  	logger.info '*******'
-  	logger.info asset_path
-  	logger.info '*******'
-
   	# Set meta tags
     set_meta_tags :title => "Where on Earth is the temperature similar to Mars?",
                   :description => "A 2013 NASA SpaceApps Challenge observing the temperature & wind speed on Mars and trying to match it with somewhere on Earth.",
@@ -21,6 +17,9 @@ class HomeController < ApplicationController
                     :image => URI.join(root_url, view_context.image_path('mearth@2x.png')),
                     :site_name => "Mearth"
 	}
+
+	@location = Geokit::Geocoders::IpGeocoder.geocode('8.8.8.8') #request.remote_ip
+	# logger.info @location.city
 
     def celcius_to_kelvin(celcius)
       return celcius+273

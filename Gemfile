@@ -22,6 +22,10 @@ gem 'google-analytics-rails'
 # Using meta-tags for head meta https://github.com/kpumuk/meta-tags
 gem 'meta-tags', :require => 'meta_tags'
 
+# Geokit-rails for location https://github.com/imajes/geokit-rails
+# gem 'geokit-rails'
+gem 'geokit-rails3'
+
 # TODO: Globe
 # https://github.com/bogwro/cesium
 # gem 'cesium'
