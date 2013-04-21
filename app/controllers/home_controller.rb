@@ -21,6 +21,28 @@ class HomeController < ApplicationController
       end
     end
 
+    # Set meta tags
+    set_meta_tags :title => "Where on Earth is the temperature similar to Mars?",
+                  :description => "A 2013 NASA SpaceApps Challenge observing the temperature & wind speed on Mars and trying to match it with somewhere on Earth.",
+                  :keywords => "mearth, mars, earth, spaceapps, adelaide, hackerspace, australia, spaceapps_adl, nasa, curiosity, rover",
+                  :canonical => root_url,
+                  :open_graph => {
+                    :title => "Where on Earth is the temperature similar to Mars?",
+                    :description => "A 2013 NASA SpaceApps Challenge observing the temperature & wind speed on Mars and trying to match it with somewhere on Earth.",
+                    :url   => root_url,
+                    :image => URI.join(root_url, view_context.image_path('mearth@2x.png')),
+                    :site_name => "Mearth"
+                  }
+
+    # logger.info request.remote_ip
+    user_location = Geokit::Geocoders::IpGeocoder.geocode(request.remote_ip) #request.remote_ip
+    # logger.info user_location
+
+    local_openweather_api = open("http://api.openweathermap.org/data/2.1/find/city?lat=#{user_location.lat}&lon=#{user_location.lng}&cnt=1").read
+    @local_wx = JSON.parse(local_openweather_api)
+    # logger.info @local_wx
+
+
     #parse mars weather data
     mars_wx = WeatherReport.build_from_xml(get_mars_wx)
 

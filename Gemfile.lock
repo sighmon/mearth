@@ -42,6 +42,12 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    geokit (1.6.5)
+      multi_json
+    geokit-rails3 (0.1.5)
+      geokit (~> 1.5)
+      rails (~> 3.0)
+    google-analytics-rails (0.0.4)
     hike (1.2.2)
     i18n (0.6.1)
     journey (1.0.4)
@@ -59,6 +65,8 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    meta-tags (1.4.1)
+      actionpack
     mime-types (1.22)
     multi_json (1.7.2)
     nokogiri (1.5.9)
@@ -135,8 +143,11 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  geokit-rails3
+  google-analytics-rails
   jquery-rails
   less-rails
+  meta-tags
   nokogiri
   pg
   rails (= 3.2.13)

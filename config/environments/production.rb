@@ -20,6 +20,9 @@ Mearth::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # replace this with your tracker code
+  GA.tracker = "UA-40300172-1"
+
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
