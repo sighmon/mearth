@@ -2,7 +2,6 @@
 	<%= retina_image_tag 'mearth.png', :size => "186x220", :alt => "Merth - Where on Earth is the temperature similar to Mars?", :title => "Merth - Where on Earth is the temperature similar to Mars?" %>
 	<h1>Mearth</h1>
 	<h2>Where on Earth is the temperature similar to Mars?</h2>
-	<p>A 2013 NASA <a href="http://spaceappschallenge.org/project/mearth/">SpaceApps Challenge</a> comparing the temperature, pressure &amp; wind speed on Mars and tries to match it with somewhere on Earth.</p>
 	<!-- <p>
 	  <button class="btn btn-primary" type="button">My location</button>
 	  <button class="btn" type="button">Choose based on temperature</button>
@@ -16,7 +15,7 @@
   	<p class="location"><a href="http://mars.jpl.nasa.gov/msl/mission/whereistherovernow/" target="_blank">Curiosity</a></p>
   	<!-- <p class="location"><%= link_to "Curiosity", "#marsModal", :"data-toggle" => 'modal' %></p> -->
   	<p class="wind-speed"><%= @mars_wind_speed %> km/h</p>
-  	<%= retina_image_tag 'nasa-logo.png', :size => "125x106" %>
+  	<%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
   </div>
   <div class="span4 planet">
   	<h3 class="earth">Earth</h3>
@@ -24,7 +23,7 @@
   	<p class="temperature-description"><%= @closest["weather"].first["description"].titleize %></p>
   	<p class="location"><%= link_to @closest["name"], "#earthModal", :"data-toggle" => 'modal' %></p>
   	<p class="wind-speed"><%= number_with_precision @closest["wind"]["speed"], :precision => 1 %> km/h</p>
-  	<%= retina_image_tag 'nasa-logo.png', :size => "125x106" %>
+  	<%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
   </div>
   <div class="span4 planet">
   	<h3 class="local">Local</h3>
@@ -32,7 +31,7 @@
   	<p class="temperature-description"><%= @local_wx["list"].first["weather"].first["description"].titleize %></p>
   	<p class="location"><%= link_to @local_wx["list"].first["name"], "#localModal", :"data-toggle" => 'modal' %></p>
   	<p class="wind-speed"><%= number_with_precision @local_wx["list"].first["wind"]["speed"], :precision => 1 %> km/h</p>
-  	<%= retina_image_tag 'nasa-logo.png', :size => "125x106" %>
+  	<%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
   </div>
 </div>
 <!-- Google maps modals -->
@@ -54,5 +53,8 @@
   	<!-- <iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://www.google.com/mars/#lon=-155.739451&map=visible&q=curiosity&amp;output=embed"></iframe> -->
   	<iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://mars.jpl.nasa.gov/msl/mission/whereistherovernow/"></iframe>
   </div>
+</div>
+<div class="footer">
+	<p>A 2013 NASA <a href="http://spaceappschallenge.org/project/mearth/">SpaceApps Challenge</a> observing the temperature &amp; wind speed on Mars and trying to match it with somewhere on Earth.</p>
 </div>
 <!-- <img src="data:image/jpeg;base64,<%# @data_uri %>"> -->

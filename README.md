@@ -1,7 +1,7 @@
 Mearth - Weather on Mars vs Weather on Earth
 ============================================
 
-A 2013 NASA SpaceApps Challenge comparing the temperature, pressure & wind speed on Mars and tries to match it with somewhere on Earth.
+A 2013 NASA SpaceApps Challenge observing the temperature, pressure & wind speed on Mars and trying to match it with somewhere on Earth.
 
 See progress at:
 [mearthapp.heroku.com](http://merthapp.heroku.com)
