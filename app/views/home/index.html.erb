@@ -10,24 +10,24 @@
 <div class="row-fluid">
   <div class="span4 planet">
   	<h3 class="mars">Mars</h3>
-  	<p class="temperature"><%= number_with_precision (@mars_max-273), :precision => 1 %>&deg;</p>
-  	<p class="temperature-description"><%= @mars_atmo %></p>
+  	<p class="temperature"><%= number_with_precision (@mars_wx.maximum_temperature-273.15), :precision => 1 %>&deg;</p>
+  	<p class="temperature-description"><%= @mars_wx.description %></p>
   	<p class="location"><a href="http://mars.jpl.nasa.gov/msl/mission/whereistherovernow/" target="_blank">Curiosity</a></p>
   	<!-- <p class="location"><%= link_to "Curiosity", "#marsModal", :"data-toggle" => 'modal' %></p> -->
-  	<p class="wind-speed"><%= @mars_wind_speed %> km/h</p>
+  	<p class="wind-speed"><%= @mars_wx.wind_speed/1000*3600 %> km/h</p>
   	<%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
   </div>
   <div class="span4 planet">
   	<h3 class="earth">Earth</h3>
-  	<p class="temperature"><%= number_with_precision (@closest_avg-273), :precision => 1 %>&deg;</p>
-  	<p class="temperature-description"><%= @closest["weather"].first["description"].titleize %></p>
-  	<p class="location"><%= link_to @closest["name"], "#earthModal", :"data-toggle" => 'modal' %></p>
-  	<p class="wind-speed"><%= number_with_precision @closest["wind"]["speed"], :precision => 1 %> km/h</p>
+  	<p class="temperature"><%= number_with_precision (@closest.average_temperature-273.15), :precision => 1 %>&deg;</p>
+  	<p class="temperature-description"><%= @closest.description.titleize %></p>
+  	<p class="location"><%= link_to @closest.name, "#earthModal", :"data-toggle" => 'modal' %></p>
+  	<p class="wind-speed"><%= number_with_precision @closest.wind_speed/1000*3600, :precision => 1 %> km/h</p>
   	<%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
   </div>
   <div class="span4 planet">
   	<h3 class="local">Local</h3>
-  	<p class="temperature"><%= number_with_precision @local_wx["list"].first["main"]["temp"]-273, :precision => 1 %>&deg;</p>
+  	<p class="temperature"><%= number_with_precision @local_wx["list"].first["main"]["temp"]-273.15, :precision => 1 %>&deg;</p>
   	<p class="temperature-description"><%= @local_wx["list"].first["weather"].first["description"].titleize %></p>
   	<p class="location"><%= link_to @local_wx["list"].first["name"], "#localModal", :"data-toggle" => 'modal' %></p>
   	<p class="wind-speed"><%= number_with_precision @local_wx["list"].first["wind"]["speed"], :precision => 1 %> km/h</p>
@@ -38,7 +38,7 @@
 <div id="earthModal" class="modal hide fade">
   <div class="modal-body">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  	<iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @closest["coord"]["lat"] %>,<%= @closest["coord"]["lon"] %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @closest["coord"]["lat"] %>,<%= @closest["coord"]["lon"] %>&amp;output=embed"></iframe>
+  	<iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @closest.latitude %>,<%= @closest.longitude %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @closest.latitude %>,<%= @closest.longitude %>&amp;output=embed"></iframe>
   </div>
 </div>
 <div id="localModal" class="modal hide fade">

@@ -42,6 +42,8 @@ class WeatherReport < ActiveRecord::Base
       longitude: city["coord"]["lon"],
       maximum_temperature: city["main"]["temp_max"],
       minimum_temperature: city["main"]["temp_min"],
+      wind_speed: city["wind"]["speed"]*1000/3600,
+      wind_direction: city["wind"]["direction"],
       pressure: city["main"]["pressure"]   
     )
    

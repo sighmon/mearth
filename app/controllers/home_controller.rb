@@ -44,80 +44,64 @@ class HomeController < ApplicationController
 
 
     #parse mars weather data
-    mars_wx = WeatherReport.build_from_xml(get_mars_wx)
+    @mars_wx = WeatherReport.build_from_xml(get_mars_wx)
 
-    @mars_min = mars_wx.minimum_temperature
-    @mars_max = mars_wx.maximum_temperature
+    gwr = GlobalWeatherReport.build_from_hash(JSON.parse(get_cities_wx)["list"])
 
-    @mars_atmo = mars_wx.description
-    @mars_wind_speed = mars_wx.wind_speed/1000*3600
+    min = gwr.weather_reports.min{|a,b| a.minimum_temperature <=> b.minimum_temperature}
+    max = gwr.weather_reports.max{|a,b| a.maximum_temperature <=> b.maximum_temperature}
 
-    cities = JSON.parse(get_cities_wx)
-  
-    min = cities["list"].min{|a,b| (a["main"].try(:[],"temp_min").to_f) <=> (b["main"].try(:[],"temp_min").to_f)}["main"]["temp_min"].to_f
-    max = cities["list"].max{|a,b| (a["main"].try(:[],"temp_max").to_f) <=> (b["main"].try(:[],"temp_max").to_f)}["main"]["temp_max"].to_f
-
- 
-    @mars_avg = mars_wx.average_temperature
-
-    def avg(city)
-      return (city["main"].try(:[],"temp_min").to_f+city["main"].try(:[],"temp_max").to_f)/2.0
-    end
-
-    @closest = cities["list"].min do |a,b| 
+    @closest = gwr.weather_reports.min do |a,b| 
 
       def dist(city)
-        #return (avg(city)-@mars_max).abs
-        return (city["main"]["temp_max"]-@mars_max).abs
+        return (city.maximum_temperature-@mars_wx.maximum_temperature).abs
       end
 
       dist(a) <=> dist(b)
     end
-
-    #@closest_avg = avg(@closest)
-    @closest_avg = @closest["main"]["temp_max"]
   
     #logger.info(@closest)
 
-    height = cities["list"].length
+    #height = cities["list"].length
 
-    canvas = Magick::Image.new(max, height,
-              Magick::HatchFill.new('white','lightcyan2')) 
-    canvas.format = "JPEG"
-    gc = Magick::Draw.new
+    #canvas = Magick::Image.new(max, height,
+    #          Magick::HatchFill.new('white','lightcyan2')) 
+    #canvas.format = "JPEG"
+    #gc = Magick::Draw.new
 
-    #gc.stroke('transparent')
-    #gc.fill('#202123')
-    #gc.pointsize('11')
-    #gc.font_family = "helvetica"
-    #gc.font_weight = Magick::BoldWeight
-    #gc.font_style  = Magick::NormalStyle
-    #cities["list"].each{|c| gc.text(x=c["coord"]["lon"]+180,y=c["coord"]["lat"]+90,text=c["name"])}
-    #cities["list"].each{|c| gc.point(x=c["coord"]["lon"]+180,y=90-c["coord"]["lat"])}
+    ##gc.stroke('transparent')
+    ##gc.fill('#202123')
+    ##gc.pointsize('11')
+    ##gc.font_family = "helvetica"
+    ##gc.font_weight = Magick::BoldWeight
+    ##gc.font_style  = Magick::NormalStyle
+    ##cities["list"].each{|c| gc.text(x=c["coord"]["lon"]+180,y=c["coord"]["lat"]+90,text=c["name"])}
+    ##cities["list"].each{|c| gc.point(x=c["coord"]["lon"]+180,y=90-c["coord"]["lat"])}
 
-    gc.stroke("red")
-    gc.line(@mars_min,0,@mars_min,height)
-    gc.line(@mars_max,0,@mars_max,height)
+    #gc.stroke("red")
+    #gc.line(@mars_min,0,@mars_min,height)
+    #gc.line(@mars_max,0,@mars_max,height)
 
-    @index=0
-    cities["list"].each do |c| 
-      if (c==@closest)
-        gc.stroke("pink")
-        gc.line(0,@index,max,@index)
-      end
-      gc.stroke("black")
-      gc.line(c["main"]["temp_min"],@index,c["main"]["temp_max"],@index)
+    #
+    ##@index=0
+    ##cities["list"].each do |c| 
+    ##  if (c==@closest)
+    ##    gc.stroke("pink")
+    ##    gc.line(0,@index,max,@index)
+    ##  end
+    ##  gc.stroke("black")
+    ##  gc.line(c["main"]["temp_min"],@index,c["main"]["temp_max"],@index)
 
-      gc.fill("green")
-      gc.stroke("green")
-      #logger.info(avg(c))
-      gc.point(avg(c),@index)
-      #fscking evil
-      @index+=1
-    end
-    #gc.text(x = 83, y = 14, text = "foobar")
-    gc.draw(canvas)
-    
-    @data_uri = Base64.encode64(canvas.to_blob).gsub(/\n/, "")  
+    ##  gc.fill("green")
+    ##  gc.stroke("green")
+    ##  #logger.info(avg(c))
+    ##  gc.point(avg(c),@index)
+    ##  #fscking evil
+    ##  @index+=1
+    ##end
+    ###gc.text(x = 83, y = 14, text = "foobar")
+    ##gc.draw(canvas)
+    #
+    #@data_uri = Base64.encode64(canvas.to_blob).gsub(/\n/, "")  
   end
 end
