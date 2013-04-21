@@ -16,6 +16,7 @@
   	<!-- <p class="location"><%= link_to "Curiosity", "#marsModal", :"data-toggle" => 'modal' %></p> -->
   	<p class="wind-speed"><%= @mars_wx.wind_speed/1000*3600 %> km/h</p>
   	<%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
+  	<p class="data-feed"><%= link_to 'Data feed', @mars_wx.url, :target => '_blank' %></p>
   </div>
   <div class="span4 planet">
   	<h3 class="earth">Earth</h3>
@@ -24,6 +25,7 @@
   	<p class="location"><%= link_to @closest.name, "#earthModal", :"data-toggle" => 'modal' %></p>
   	<p class="wind-speed"><%= number_with_precision @closest.wind_speed/1000*3600, :precision => 1 %> km/h</p>
   	<%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
+  	<p class="data-feed"><%= link_to 'Data feed', @closest.url, :target => '_blank' %></p>
   </div>
   <div class="span4 planet">
   	<h3 class="local">Local</h3>
@@ -32,6 +34,7 @@
   	<p class="location"><%= link_to @local_wx["list"].first["name"], "#localModal", :"data-toggle" => 'modal' %></p>
   	<p class="wind-speed"><%= number_with_precision @local_wx["list"].first["wind"]["speed"], :precision => 1 %> km/h</p>
   	<%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
+  	<p class="data-feed">Data feed (soon)</p>
   </div>
 </div>
 <!-- Google maps modals -->
