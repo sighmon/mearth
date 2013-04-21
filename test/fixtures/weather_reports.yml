@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  minimum_temperature: 1.5
+  maximum_temperature: 1.5
+  average_temperature: 1.5
+  description: MyString
+  wind_speed: 1.5
+  wind_direction: 1.5
+  latitude: 1.5
+  longitude: 1.5
+  sunset: 2013-04-21 11:02:48
+  sunrise: 2013-04-21 11:02:48
+  pressure: 1.5
+
+two:
+  name: MyString
+  minimum_temperature: 1.5
+  maximum_temperature: 1.5
+  average_temperature: 1.5
+  description: MyString
+  wind_speed: 1.5
+  wind_direction: 1.5
+  latitude: 1.5
+  longitude: 1.5
+  sunset: 2013-04-21 11:02:48
+  sunrise: 2013-04-21 11:02:48
+  pressure: 1.5

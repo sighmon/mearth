@@ -4,8 +4,9 @@ require 'RMagick'
 
 class HomeController < ApplicationController
   def index
+
     def celcius_to_kelvin(celcius)
-      return celcius+273
+      return celcius+273.15
     end
 
     def get_mars_wx
@@ -21,13 +22,13 @@ class HomeController < ApplicationController
     end
 
     #parse mars weather data
-    mars_wx = Nokogiri.XML(get_mars_wx)
+    mars_wx = WeatherReport.build_from_xml(get_mars_wx)
 
-    @mars_min = celcius_to_kelvin(mars_wx.at_xpath("//min_temp").text.to_f)
-    @mars_max = celcius_to_kelvin(mars_wx.at_xpath("//max_temp").text.to_f)
+    @mars_min = mars_wx.minimum_temperature
+    @mars_max = mars_wx.maximum_temperature
 
-    @mars_atmo = mars_wx.at_xpath("//atmo_opacity").text
-    @mars_wind_speed = mars_wx.at_xpath("//wind_speed").text.to_f
+    @mars_atmo = mars_wx.description
+    @mars_wind_speed = mars_wx.wind_speed/1000*3600
 
     cities = JSON.parse(get_cities_wx)
   
@@ -35,7 +36,7 @@ class HomeController < ApplicationController
     max = cities["list"].max{|a,b| (a["main"].try(:[],"temp_max").to_f) <=> (b["main"].try(:[],"temp_max").to_f)}["main"]["temp_max"].to_f
 
  
-    @mars_avg = (@mars_min+@mars_max)/2.0
+    @mars_avg = mars_wx.average_temperature
 
     def avg(city)
       return (city["main"].try(:[],"temp_min").to_f+city["main"].try(:[],"temp_max").to_f)/2.0
@@ -44,13 +45,15 @@ class HomeController < ApplicationController
     @closest = cities["list"].min do |a,b| 
 
       def dist(city)
-        return (avg(city)-@mars_max).abs
+        #return (avg(city)-@mars_max).abs
+        return (city["main"]["temp_max"]-@mars_max).abs
       end
 
       dist(a) <=> dist(b)
     end
 
-    @closest_avg = avg(@closest)
+    #@closest_avg = avg(@closest)
+    @closest_avg = @closest["main"]["temp_max"]
   
     #logger.info(@closest)
 
