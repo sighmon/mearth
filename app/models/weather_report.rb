@@ -1,6 +1,6 @@
 class WeatherReport < ActiveRecord::Base
   #TODO: get rid of average temperature
-  attr_accessible :description, :latitude, :longitude, :maximum_temperature, :minimum_temperature, :name, :pressure, :sunrise, :sunset, :wind_direction, :wind_speed, :url
+  attr_accessible :description, :latitude, :longitude, :maximum_temperature, :minimum_temperature, :name, :pressure, :sunrise, :sunset, :wind_direction, :wind_speed, :url, :current_temperature
 
   belongs_to :global_weather_report  
 
@@ -41,6 +41,7 @@ class WeatherReport < ActiveRecord::Base
       name: city["name"],
       latitude: city["coord"]["lat"],
       longitude: city["coord"]["lon"],
+      current_temperature: city["main"]["temp"],
       maximum_temperature: city["main"]["temp_max"],
       minimum_temperature: city["main"]["temp_min"],
       wind_speed: city["wind"]["speed"]*1000/3600,

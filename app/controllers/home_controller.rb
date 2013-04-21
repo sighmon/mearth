@@ -39,7 +39,7 @@ class HomeController < ApplicationController
     # logger.info user_location
 
     local_openweather_api = open("http://api.openweathermap.org/data/2.1/find/city?lat=#{user_location.lat}&lon=#{user_location.lng}&cnt=1").read
-    @local_wx = JSON.parse(local_openweather_api)
+    @local_wx = WeatherReport.build_from_hash(JSON.parse(local_openweather_api)["list"].first)
     # logger.info @local_wx
 
 

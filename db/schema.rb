@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130421065656) do
+ActiveRecord::Schema.define(:version => 20130421110404) do
 
   create_table "global_weather_reports", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20130421065656) do
     t.datetime "updated_at",               :null => false
     t.integer  "global_weather_report_id"
     t.string   "url"
+    t.float    "current_temperature"
   end
 
 end

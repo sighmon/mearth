@@ -25,16 +25,16 @@
   	<p class="location"><%= link_to @closest_wx.name, "#earthModal", :"data-toggle" => 'modal' %></p>
   	<p class="wind-speed"><%= number_with_precision @closest_wx.wind_speed/1000*3600, :precision => 1 %> km/h</p>
   	<%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
-  	<p class="data-feed"><%= link_to 'Data feed', @closest.url, :target => '_blank' %></p>
+  	<p class="data-feed"><%= link_to 'Data feed', @closest_wx.url, :target => '_blank' %></p>
   </div>
   <div class="span4 planet">
   	<h3 class="local">Local</h3>
-  	<p class="temperature"><%= number_with_precision @local_wx["list"].first["main"]["temp"]-273.15, :precision => 1 %>&deg;</p>
-  	<p class="temperature-description"><%= @local_wx["list"].first["weather"].first["description"].titleize %></p>
-  	<p class="location"><%= link_to @local_wx["list"].first["name"], "#localModal", :"data-toggle" => 'modal' %></p>
-  	<p class="wind-speed"><%= number_with_precision @local_wx["list"].first["wind"]["speed"], :precision => 1 %> km/h</p>
+  	<p class="temperature"><%= number_with_precision @local_wx.current_temperature-273.15, :precision => 1 %>&deg;</p>
+  	<p class="temperature-description"><%= @local_wx.description.titleize %></p>
+  	<p class="location"><%= link_to @local_wx.name, "#localModal", :"data-toggle" => 'modal' %></p>
+  	<p class="wind-speed"><%= number_with_precision @local_wx.wind_speed, :precision => 1 %> km/h</p>
   	<%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
-  	<p class="data-feed">Data feed (soon)</p>
+  	<p class="data-feed"><%= link_to 'Data feed', @local_wx.url, :target => '_blank' %></p>
   </div>
 </div>
 <!-- Google maps modals -->
@@ -47,7 +47,7 @@
 <div id="localModal" class="modal hide fade">
   <div class="modal-body">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  	<iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @local_wx["list"].first["coord"]["lat"] %>,<%= @local_wx["list"].first["coord"]["lon"] %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @local_wx["list"].first["coord"]["lat"] %>,<%= @local_wx["list"].first["coord"]["lon"] %>&amp;output=embed"></iframe>
+  	<iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @local_wx.latitude %>,<%= @local_wx.longitude %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @local_wx.latitude %>,<%= @local_wx.longitude %>&amp;output=embed"></iframe>
   </div>
 </div>
 <div id="marsModal" class="modal hide fade">
