@@ -1,6 +1,6 @@
 class WeatherReport < ActiveRecord::Base
   #TODO: get rid of average temperature
-  attr_accessible :description, :latitude, :longitude, :maximum_temperature, :minimum_temperature, :name, :pressure, :sunrise, :sunset, :wind_direction, :wind_speed
+  attr_accessible :description, :latitude, :longitude, :maximum_temperature, :minimum_temperature, :name, :pressure, :sunrise, :sunset, :wind_direction, :wind_speed, :url
 
   belongs_to :global_weather_report  
 
@@ -27,7 +27,8 @@ class WeatherReport < ActiveRecord::Base
       wind_speed: doc.at_xpath("//wind_speed").text.to_f*1000/3600,
       wind_direction: cardinal_to_bearing(doc.at_xpath("//wind_direction").text),
       name: "Curiosity",
-      pressure: doc.at_xpath("//wind_speed").text.to_f
+      pressure: doc.at_xpath("//wind_speed").text.to_f,
+      url: "https://cab.inta-csic.es/rems/marsweather.html"
     )
     
   end
@@ -44,7 +45,8 @@ class WeatherReport < ActiveRecord::Base
       minimum_temperature: city["main"]["temp_min"],
       wind_speed: city["wind"]["speed"]*1000/3600,
       wind_direction: city["wind"]["direction"],
-      pressure: city["main"]["pressure"]   
+      pressure: city["main"]["pressure"],
+      url: "http://openweathermap.org/city/%s" % city["id"]
     )
    
   end
