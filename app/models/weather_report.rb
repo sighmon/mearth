@@ -24,7 +24,7 @@ class WeatherReport < ActiveRecord::Base
       description: doc.at_xpath("//atmo_opacity").text,
       minimum_temperature: celcius_to_kelvin(doc.at_xpath("//min_temp").text.to_f),
       maximum_temperature: celcius_to_kelvin(doc.at_xpath("//max_temp").text.to_f),
-      wind_speed: doc.at_xpath("//wind_speed").text.to_f*1000/3600,
+      wind_speed: doc.at_xpath("//wind_speed").text.to_f,
       wind_direction: cardinal_to_bearing(doc.at_xpath("//wind_direction").text),
       name: "Curiosity",
       pressure: doc.at_xpath("//wind_speed").text.to_f,
