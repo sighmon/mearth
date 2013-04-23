@@ -39,7 +39,7 @@ class HomeController < ApplicationController
     # logger.info user_location
 
     local_openweather_api = open("http://api.openweathermap.org/data/2.1/find/city?lat=#{user_location.lat}&lon=#{user_location.lng}&cnt=1").read
-    @local_wx = JSON.parse(local_openweather_api)
+    @local_wx = WeatherReport.build_from_hash(JSON.parse(local_openweather_api)["list"].first)
     # logger.info @local_wx
 
 
@@ -51,14 +51,7 @@ class HomeController < ApplicationController
     min = gwr.weather_reports.min{|a,b| a.minimum_temperature <=> b.minimum_temperature}
     max = gwr.weather_reports.max{|a,b| a.maximum_temperature <=> b.maximum_temperature}
 
-    @closest = gwr.weather_reports.min do |a,b| 
-
-      def dist(city)
-        return (city.maximum_temperature-@mars_wx.maximum_temperature).abs
-      end
-
-      dist(a) <=> dist(b)
-    end
+    @closest_wx = gwr.weather_reports.sort_by{|r| (r.maximum_temperature-@mars_wx.maximum_temperature).abs}.first
   
     #logger.info(@closest)
 
