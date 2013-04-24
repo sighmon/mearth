@@ -10,7 +10,18 @@ class WeatherReport < ActiveRecord::Base
 
   # not implemented yet
   def self.cardinal_to_bearing(cardinal)
-    return 0
+    case cardinal
+      when "N"
+        return 0
+      when "E"
+        return 90
+      when "S"
+        return 180
+      when "W"
+        return 270
+      else
+        return 0
+    end
   end
 
   def average_temperature
