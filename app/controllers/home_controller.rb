@@ -15,6 +15,12 @@ class HomeController < ApplicationController
       end
     end
 
+    def get_maas_wx
+      Rails.cache.fetch("maas_wx",:expires_in => 5.minutes) do
+        open("http://marsweather.ingenology.com/v1/latest/").read
+      end
+    end
+
     def get_cities_wx
       Rails.cache.fetch("cities_wx",:expires_in => 5.minutes) do
         open("http://openweathermap.org/data/2.1/find/city?format=json&bbox=-180,-90,180,90").read
@@ -44,7 +50,7 @@ class HomeController < ApplicationController
 
 
     #parse mars weather data
-    @mars_wx = WeatherReport.build_from_xml(get_mars_wx)
+    @mars_wx = WeatherReport.build_from_maas_v1(get_maas_wx)
 
     gwr = GlobalWeatherReport.build_from_hash(JSON.parse(get_cities_wx)["list"])
 

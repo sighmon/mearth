@@ -8,6 +8,7 @@ class WeatherReport < ActiveRecord::Base
     return celcius+273.15
   end
 
+  # not implemented yet
   def self.cardinal_to_bearing(cardinal)
     return 0
   end
@@ -15,7 +16,8 @@ class WeatherReport < ActiveRecord::Base
   def average_temperature
     (minimum_temperature+maximum_temperature)/2.0
   end
-
+ 
+  # for data from http://cab.inta-csic.es/rems/rems_weather.xml
   def self.build_from_xml(xml)
 
     doc = Nokogiri.XML(xml)
@@ -33,7 +35,7 @@ class WeatherReport < ActiveRecord::Base
     
   end
 
-  # json hash
+  # json hash from openweathermap.com
   def self.build_from_hash(city)
  
     WeatherReport.new(
@@ -51,5 +53,25 @@ class WeatherReport < ActiveRecord::Base
     )
    
   end
+
+  # for stream from http://marsweather.ingenology.com/
+  def self.build_from_maas_v1(json)
+
+    report = JSON.parse(json)["report"]
+ 
+    WeatherReport.new(
+      description: report["atmo_opacity"],
+      name: "Curiosity",
+      maximum_temperature: celcius_to_kelvin(report["max_temp"]),
+      minimum_temperature: celcius_to_kelvin(report["min_temp"]),
+      wind_speed: report["wind_speed"],
+      wind_direction: report["wind_direction"],
+      wind_direction: cardinal_to_bearing(report["wind_direction"]),
+      pressure: report["pressure"],
+      url: "https://cab.inta-csic.es/rems/marsweather.html"
+    )
+   
+  end
+  
 
 end
