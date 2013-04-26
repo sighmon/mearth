@@ -41,7 +41,8 @@ class WeatherReport < ActiveRecord::Base
       wind_direction: cardinal_to_bearing(doc.at_xpath("//wind_direction").text),
       name: "Curiosity",
       pressure: doc.at_xpath("//wind_speed").text.to_f,
-      url: "https://cab.inta-csic.es/rems/marsweather.html"
+      # url: "https://cab.inta-csic.es/rems/marsweather.html"
+      url: "http://marsweather.ingenology.com"
     )
     
   end
