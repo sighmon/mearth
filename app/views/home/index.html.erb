@@ -10,7 +10,7 @@
 <div class="row-fluid">
   <div class="span4 planet">
   	<h3 class="mars">Mars</h3>
-  	<p class="temperature"><%= number_with_precision (@mars_wx.maximum_temperature-273.15), :precision => 1 %>&deg;</p>
+  	<p class="temperature"><%= number_with_precision (@mars_wx.maximum_temperature-273.15), :precision => 1 %>&deg;C</p>
   	<p class="temperature-description"><%= @mars_wx.description %></p>
   	<p class="location"><a href="http://mars.jpl.nasa.gov/msl/mission/whereistherovernow/" target="_blank">Curiosity</a></p>
   	<!-- <p class="location"><%= link_to "Curiosity", "#marsModal", :"data-toggle" => 'modal' %></p> -->
@@ -20,7 +20,7 @@
   </div>
   <div class="span4 planet">
   	<h3 class="earth">Earth</h3>
-  	<p class="temperature"><%= number_with_precision (@closest_wx.maximum_temperature-273.15), :precision => 1 %>&deg;</p>
+  	<p class="temperature"><%= number_with_precision (@closest_wx.maximum_temperature-273.15), :precision => 1 %>&deg;C</p>
   	<p class="temperature-description"><%= @closest_wx.description.titleize %></p>
   	<p class="location"><%= link_to @closest_wx.name, "#earthModal", :"data-toggle" => 'modal' %></p>
   	<p class="wind-speed"><%= number_with_precision @closest_wx.wind_speed/1000*3600, :precision => 1 %> km/h</p>
@@ -29,7 +29,7 @@
   </div>
   <div class="span4 planet">
   	<h3 class="local">Local</h3>
-  	<p class="temperature"><%= number_with_precision @local_wx.current_temperature-273.15, :precision => 1 %>&deg;</p>
+  	<p class="temperature"><%= number_with_precision @local_wx.current_temperature-273.15, :precision => 1 %>&deg;C</p>
   	<p class="temperature-description"><%= @local_wx.description.titleize %></p>
   	<p class="location"><%= link_to @local_wx.name, "#localModal", :"data-toggle" => 'modal' %></p>
   	<p class="wind-speed"><%= number_with_precision @local_wx.wind_speed, :precision => 1 %> km/h</p>
