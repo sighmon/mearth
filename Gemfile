@@ -36,7 +36,7 @@ gem 'geokit-rails3'
 
 # RetinaImageTag for retina display support
 # https://github.com/ffaerber/retina_image_tag
-gem 'retina_image_tag', :git => "https://github.com/thatpixguy/retina_image_tag.git"
+gem 'retina_image_tag', '>= 1.0.2'
 
 # Twitter Bootstrap Rails gem
 gem "therubyracer"
