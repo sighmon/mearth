@@ -79,7 +79,7 @@ class WeatherReport < ActiveRecord::Base
       wind_direction: report["wind_direction"],
       wind_direction: cardinal_to_bearing(report["wind_direction"]),
       pressure: report["pressure"],
-      url: "https://cab.inta-csic.es/rems/marsweather.html"
+      url: "http://marsweather.ingenology.com"
     )
    
   end

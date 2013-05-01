@@ -1,11 +1,7 @@
 <div class="header">
-	<%= retina_image_tag 'mearth.png', :size => "186x220", :alt => "Merth - Where on Earth is the temperature similar to Mars?", :title => "Merth - Where on Earth is the temperature similar to Mars?" %>
+	<%= retina_image_tag 'mearth.png', :size => "186x220", :alt => "Mearth - Where on Earth is the temperature similar to Mars?", :title => "Mearth - Where on Earth is the temperature similar to Mars?" %>
 	<h1>Mearth</h1>
 	<h2>Where on Earth is the temperature similar to Mars?</h2>
-	<!-- <p>
-	  <button class="btn btn-primary" type="button">My location</button>
-	  <button class="btn" type="button">Choose based on temperature</button>
-	</p> -->
 </div>
 <div class="row-fluid">
   <div class="span4 planet">
@@ -13,7 +9,6 @@
   	<p class="temperature"><%= number_with_precision (@mars_wx.maximum_temperature-273.15), :precision => 1 %>&deg;C</p>
   	<p class="temperature-description"><%= @mars_wx.description %></p>
   	<p class="location"><a href="http://mars.jpl.nasa.gov/msl/mission/whereistherovernow/" target="_blank">Curiosity</a></p>
-  	<!-- <p class="location"><%= link_to "Curiosity", "#marsModal", :"data-toggle" => 'modal' %></p> -->
   	<p class="wind-speed"><%= @mars_wx.wind_speed/1000*3600 %> km/h</p>
   	<%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
   	<p class="data-feed"><%= link_to 'Data feed', @mars_wx.url, :target => '_blank' %></p>
@@ -41,13 +36,15 @@
 <div id="earthModal" class="modal hide fade">
   <div class="modal-body">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  	<iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @closest_wx.latitude %>,<%= @closest_wx.longitude %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @closest_wx.latitude %>,<%= @closest_wx.longitude %>&amp;output=embed"></iframe>
+  	<!-- <iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @closest_wx.latitude %>,<%= @closest_wx.longitude %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @closest_wx.latitude %>,<%= @closest_wx.longitude %>&amp;output=embed"></iframe> -->
+    <div id="earthMapCanvas" class="mapCanvas"></div>
   </div>
 </div>
 <div id="localModal" class="modal hide fade">
   <div class="modal-body">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  	<iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @local_wx.latitude %>,<%= @local_wx.longitude %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @local_wx.latitude %>,<%= @local_wx.longitude %>&amp;output=embed"></iframe>
+  	<!-- <iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @local_wx.latitude %>,<%= @local_wx.longitude %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @local_wx.latitude %>,<%= @local_wx.longitude %>&amp;output=embed"></iframe> -->
+    <div id="localMapCanvas" class="mapCanvas"></div>
   </div>
 </div>
 <div id="marsModal" class="modal hide fade">
