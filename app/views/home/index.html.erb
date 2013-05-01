@@ -36,13 +36,15 @@
 <div id="earthModal" class="modal hide fade">
   <div class="modal-body">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  	<iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @closest_wx.latitude %>,<%= @closest_wx.longitude %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @closest_wx.latitude %>,<%= @closest_wx.longitude %>&amp;output=embed"></iframe>
+  	<!-- <iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @closest_wx.latitude %>,<%= @closest_wx.longitude %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @closest_wx.latitude %>,<%= @closest_wx.longitude %>&amp;output=embed"></iframe> -->
+    <div id="earthMapCanvas" class="mapCanvas"></div>
   </div>
 </div>
 <div id="localModal" class="modal hide fade">
   <div class="modal-body">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  	<iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @local_wx.latitude %>,<%= @local_wx.longitude %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @local_wx.latitude %>,<%= @local_wx.longitude %>&amp;output=embed"></iframe>
+  	<!-- <iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @local_wx.latitude %>,<%= @local_wx.longitude %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @local_wx.latitude %>,<%= @local_wx.longitude %>&amp;output=embed"></iframe> -->
+    <div id="localMapCanvas" class="mapCanvas"></div>
   </div>
 </div>
 <div id="marsModal" class="modal hide fade">
