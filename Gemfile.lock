@@ -68,6 +68,7 @@ GEM
     meta-tags (1.4.1)
       actionpack
     mime-types (1.22)
+    modernizr-rails (2.6.2.1)
     multi_json (1.7.2)
     nokogiri (1.5.9)
     pg (0.15.1)
@@ -148,6 +149,7 @@ DEPENDENCIES
   jquery-rails
   less-rails
   meta-tags
+  modernizr-rails
   nokogiri
   pg
   rails (= 3.2.13)
