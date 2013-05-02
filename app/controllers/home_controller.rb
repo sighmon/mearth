@@ -40,14 +40,15 @@ class HomeController < ApplicationController
                     :site_name => "Mearth"
                   }
 
-    # logger.info request.remote_ip
-    user_location = Geokit::Geocoders::IpGeocoder.geocode(request.remote_ip) #request.remote_ip
-    # logger.info user_location
-
-    local_openweather_api = open("http://api.openweathermap.org/data/2.1/find/city?lat=#{user_location.lat}&lon=#{user_location.lng}&cnt=1").read
-    @local_wx = WeatherReport.build_from_hash(JSON.parse(local_openweather_api)["list"].first)
-    # logger.info @local_wx
-
+    # dummy report
+    @local_wx = WeatherReport.new(
+      description: "",
+      name: "thinking...",
+      maximum_temperature: 273.15,
+      minimum_temperature: 273.15,
+      wind_speed: 0,
+      url: "http://openweathermap.org/Maps"
+    )
 
     #parse mars weather data
     @mars_wx = WeatherReport.build_from_maas_v1(get_maas_wx)
@@ -59,48 +60,20 @@ class HomeController < ApplicationController
 
     @closest_wx = gwr.weather_reports.sort_by{|r| (r.maximum_temperature-@mars_wx.maximum_temperature).abs}.first
   
-    #logger.info(@closest)
-
-    #height = cities["list"].length
-
-    #canvas = Magick::Image.new(max, height,
-    #          Magick::HatchFill.new('white','lightcyan2')) 
-    #canvas.format = "JPEG"
-    #gc = Magick::Draw.new
-
-    ##gc.stroke('transparent')
-    ##gc.fill('#202123')
-    ##gc.pointsize('11')
-    ##gc.font_family = "helvetica"
-    ##gc.font_weight = Magick::BoldWeight
-    ##gc.font_style  = Magick::NormalStyle
-    ##cities["list"].each{|c| gc.text(x=c["coord"]["lon"]+180,y=c["coord"]["lat"]+90,text=c["name"])}
-    ##cities["list"].each{|c| gc.point(x=c["coord"]["lon"]+180,y=90-c["coord"]["lat"])}
-
-    #gc.stroke("red")
-    #gc.line(@mars_min,0,@mars_min,height)
-    #gc.line(@mars_max,0,@mars_max,height)
-
-    #
-    ##@index=0
-    ##cities["list"].each do |c| 
-    ##  if (c==@closest)
-    ##    gc.stroke("pink")
-    ##    gc.line(0,@index,max,@index)
-    ##  end
-    ##  gc.stroke("black")
-    ##  gc.line(c["main"]["temp_min"],@index,c["main"]["temp_max"],@index)
-
-    ##  gc.fill("green")
-    ##  gc.stroke("green")
-    ##  #logger.info(avg(c))
-    ##  gc.point(avg(c),@index)
-    ##  #fscking evil
-    ##  @index+=1
-    ##end
-    ###gc.text(x = 83, y = 14, text = "foobar")
-    ##gc.draw(canvas)
-    #
-    #@data_uri = Base64.encode64(canvas.to_blob).gsub(/\n/, "")  
   end
+
+  def localwx
+    if params[:longitude].nil? or params[:latitude].nil?
+      location = Geokit::Geocoders::IpGeocoder.geocode(request.remote_ip) #request.remote_ip
+      longitude = location.lng
+      latitude = location.lat
+    else
+      longitude = params[:longitude]
+      latitude = params[:latitude]
+    end
+    openweather_result = open("http://api.openweathermap.org/data/2.1/find/city?lat=#{latitude}&lon=#{longitude}&cnt=1").read
+    @local_wx = WeatherReport.build_from_hash(JSON.parse(openweather_result)["list"].first)
+    render :partial => "wx", :locals => {:wx => @local_wx, :modal => "localModal", :name => "local", :displayName => "Local"}
+  end
+
 end

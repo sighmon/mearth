@@ -1,6 +1,6 @@
 
 <div class="span4 planet">
-  <h3 class="<%= name %>"><%= displayName %></h3>
+  <h3 class="<%= name %>" data-longitude="<%= wx.longitude %>" data-latitude="<%= wx.latitude %>"><%= displayName %></h3>
   <p class="temperature"><%= number_with_precision (wx.maximum_temperature-273.15), :precision => 1 %><sup>&deg;C</sup></p>
   <p class="temperature-description"><%= wx.description.titleize %></p>
   <p class="location">
@@ -13,12 +13,4 @@
   <p class="wind-speed"><%= number_with_precision wx.wind_speed/1000*3600, :precision => 1 %> km/h</p>
   <%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
   <p class="data-feed"><%= link_to 'Data feed', wx.url, :target => '_blank' %></p>
-  <% if name!="mars" %>
-  <div id="<%= modal %>" class="modal hide fade" data-longitude="<%= wx.longitude %>" data-latitude="<%= wx.latitude %>">
-    <div class="modal-body">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <div id="<%= name %>MapCanvas" class="mapCanvas"></div>
-    </div>
-  </div>
-  <% end %>
 </div>

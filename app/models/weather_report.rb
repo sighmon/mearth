@@ -1,5 +1,4 @@
 class WeatherReport < ActiveRecord::Base
-  #TODO: get rid of average temperature
   attr_accessible :description, :latitude, :longitude, :maximum_temperature, :minimum_temperature, :name, :pressure, :sunrise, :sunset, :wind_direction, :wind_speed, :url, :current_temperature
 
   belongs_to :global_weather_report  

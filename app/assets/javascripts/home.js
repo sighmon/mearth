@@ -3,8 +3,10 @@ function success(position) {
   $(function() {
     console.log("setting position");
     console.log(position);
-    $("#localModal").data("longitude",position.coords.longitude);
-    $("#localModal").data("latitude",position.coords.latitude);
+    //$("h3.local").data("longitude",position.coords.longitude);
+    //$("h3.local").data("latitude",position.coords.latitude);
+    $("h3.local").parent().load("home/localwx div > *","latitude="+position.coords.latitude+"&longitude="+position.coords.longitude);
+    
   });
 
   // instead of this we should re-gen the _wx block with ajax.
@@ -12,8 +14,10 @@ function success(position) {
 }
 
 function buildMap(modal) {
-  latitude = $(modal).data("latitude");
-  longitude = $(modal).data("longitude");
+  wx = $("h3."+modal.id.slice(0,-5));
+  latitude = wx.data("latitude");
+  longitude = wx.data("longitude");
+  console.log(wx,longitude,latitude);
   var latlng = new google.maps.LatLng(latitude, longitude);
   var myOptions = {
     zoom: 12,
@@ -23,7 +27,6 @@ function buildMap(modal) {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   map = new google.maps.Map($(modal).find(".mapCanvas")[0], myOptions);
-  
 
   var marker = new google.maps.Marker({
       position: latlng, 
@@ -45,6 +48,10 @@ function error(msg) {
   //s.className = 'fail';
   
   console.log("Error",msg);
+  $(function() {
+    $("h3.local").parent().load("home/localwx div > *");
+    
+  });
 }
 
 if (Modernizr.geolocation) {

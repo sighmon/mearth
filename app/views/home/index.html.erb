@@ -11,4 +11,6 @@
 <div class="footer">
 	<p>A 2013 NASA <a href="http://spaceappschallenge.org/project/mearth/">SpaceApps Challenge</a> observing the temperature &amp; wind speed on Mars and trying to match it with somewhere on Earth.</p>
 </div>
+<%= render "modal", :wx => @closest_wx, :modal => "earthModal", :name => "earth", :displayName => "Earth" %>
+<%= render "modal", :wx => @local_wx, :modal => "localModal", :name => "local", :displayName => "Local" %>
 <!-- <img src="data:image/jpeg;base64,<%# @data_uri %>"> -->
