@@ -4,55 +4,9 @@
 	<h2>Where on Earth is the temperature similar to Mars?</h2>
 </div>
 <div class="row-fluid">
-  <div class="span4 planet">
-  	<h3 class="mars">Mars</h3>
-  	<p class="temperature"><%= number_with_precision (@mars_wx.maximum_temperature-273.15), :precision => 1 %>&deg;C</p>
-  	<p class="temperature-description"><%= @mars_wx.description %></p>
-  	<p class="location"><a href="http://mars.jpl.nasa.gov/msl/mission/whereistherovernow/" target="_blank">Curiosity</a></p>
-  	<p class="wind-speed"><%= @mars_wx.wind_speed/1000*3600 %> km/h</p>
-  	<%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
-  	<p class="data-feed"><%= link_to 'Data feed', @mars_wx.url, :target => '_blank' %></p>
-  </div>
-  <div class="span4 planet">
-  	<h3 class="earth">Earth</h3>
-  	<p class="temperature"><%= number_with_precision (@closest_wx.maximum_temperature-273.15), :precision => 1 %>&deg;C</p>
-  	<p class="temperature-description"><%= @closest_wx.description.titleize %></p>
-  	<p class="location"><%= link_to @closest_wx.name, "#earthModal", :"data-toggle" => 'modal' %></p>
-  	<p class="wind-speed"><%= number_with_precision @closest_wx.wind_speed/1000*3600, :precision => 1 %> km/h</p>
-  	<%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
-  	<p class="data-feed"><%= link_to 'Data feed', @closest_wx.url, :target => '_blank' %></p>
-  </div>
-  <div class="span4 planet">
-  	<h3 class="local">Local</h3>
-  	<p class="temperature"><%= number_with_precision @local_wx.current_temperature-273.15, :precision => 1 %>&deg;C</p>
-  	<p class="temperature-description"><%= @local_wx.description.titleize %></p>
-  	<p class="location"><%= link_to @local_wx.name, "#localModal", :"data-toggle" => 'modal' %></p>
-  	<p class="wind-speed"><%= number_with_precision @local_wx.wind_speed, :precision => 1 %> km/h</p>
-  	<%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
-  	<p class="data-feed"><%= link_to 'Data feed', @local_wx.url, :target => '_blank' %></p>
-  </div>
-</div>
-<!-- Google maps modals -->
-<div id="earthModal" class="modal hide fade">
-  <div class="modal-body">
-  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  	<!-- <iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @closest_wx.latitude %>,<%= @closest_wx.longitude %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @closest_wx.latitude %>,<%= @closest_wx.longitude %>&amp;output=embed"></iframe> -->
-    <div id="earthMapCanvas" class="mapCanvas"></div>
-  </div>
-</div>
-<div id="localModal" class="modal hide fade">
-  <div class="modal-body">
-  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  	<!-- <iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?q=<%= @local_wx.latitude %>,<%= @local_wx.longitude %>&amp;ie=UTF8&amp;t=h&amp;z=10&amp;ll=<%= @local_wx.latitude %>,<%= @local_wx.longitude %>&amp;output=embed"></iframe> -->
-    <div id="localMapCanvas" class="mapCanvas"></div>
-  </div>
-</div>
-<div id="marsModal" class="modal hide fade">
-  <div class="modal-body">
-  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  	<!-- <iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://www.google.com/mars/#lon=-155.739451&map=visible&q=curiosity&amp;output=embed"></iframe> -->
-  	<iframe width="530" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://mars.jpl.nasa.gov/msl/mission/whereistherovernow/"></iframe>
-  </div>
+  <%= render "wx", :wx => @mars_wx, :name => "mars", :displayName => "Mars" %>
+  <%= render "wx", :wx => @closest_wx, :modal => "earthModal", :name => "earth", :displayName => "Earth" %>
+  <%= render "wx", :wx => @local_wx, :modal => "localModal", :name => "local", :displayName => "Local" %>
 </div>
 <div class="footer">
 	<p>A 2013 NASA <a href="http://spaceappschallenge.org/project/mearth/">SpaceApps Challenge</a> observing the temperature &amp; wind speed on Mars and trying to match it with somewhere on Earth.</p>

@@ -1,48 +1,56 @@
+
 function success(position) {
-  var s = document.querySelector('#status');
-  
-  if (s.className == 'success') {
-    // not sure why we're hitting this twice in FF, I think it's to do with a cached result coming back    
-    return;
-  }
-  
-  s.innerHTML = "found you!";
-  s.className = 'success';
-  
-  var mapcanvas = document.createElement('div');
-  mapcanvas.id = 'mapcanvas';
-  mapcanvas.style.height = '400px';
-  mapcanvas.style.width = '560px';
-    
-  document.querySelector('earthMapCanvas');
-  
-  var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  $(function() {
+    console.log("setting position");
+    console.log(position);
+    $("#localModal").data("longitude",position.coords.longitude);
+    $("#localModal").data("latitude",position.coords.latitude);
+  });
+
+  // instead of this we should re-gen the _wx block with ajax.
+  // (in which case the modal should be nested inside the top div)
+}
+
+function buildMap(modal) {
+  latitude = $(modal).data("latitude");
+  longitude = $(modal).data("longitude");
+  var latlng = new google.maps.LatLng(latitude, longitude);
   var myOptions = {
-    zoom: 15,
+    zoom: 12,
     center: latlng,
     mapTypeControl: false,
     navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
-  var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+  map = new google.maps.Map($(modal).find(".mapCanvas")[0], myOptions);
   
+
   var marker = new google.maps.Marker({
       position: latlng, 
       map: map, 
-      title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
   });
+
 }
 
+$(function(){
+  $(".mapCanvas").parent().parent().on("shown",function(){
+    console.log("shown",this);
+    buildMap(this);
+  });
+});
+
 function error(msg) {
-  var s = document.querySelector('#status');
-  s.innerHTML = typeof msg == 'string' ? msg : "failed";
-  s.className = 'fail';
+  //var s = document.querySelector('#status');
+  //s.innerHTML = typeof msg == 'string' ? msg : "failed";
+  //s.className = 'fail';
   
-  // console.log(arguments);
+  console.log("Error",msg);
 }
 
 if (navigator.geolocation) {
-  // navigator.geolocation.getCurrentPosition(success, error);
+  //navigator.geolocation.getCurrentPosition(success, function(){success({"coords":{"latitude":16.775833,"longitude":-3.009444,"accuracy":0}})});
+  navigator.geolocation.getCurrentPosition(success, error);
 } else {
   error('not supported');
 }
+
