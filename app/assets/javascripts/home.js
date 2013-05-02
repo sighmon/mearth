@@ -47,9 +47,9 @@ function error(msg) {
   console.log("Error",msg);
 }
 
-if (navigator.geolocation) {
+if (Modernizr.geolocation) {
   //navigator.geolocation.getCurrentPosition(success, function(){success({"coords":{"latitude":16.775833,"longitude":-3.009444,"accuracy":0}})});
-  navigator.geolocation.getCurrentPosition(success, error);
+  navigator.geolocation.getCurrentPosition(success, error, {timeout:3000});
 } else {
   error('not supported');
 }
