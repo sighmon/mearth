@@ -10,7 +10,7 @@
   <%= link_to wx.name, "##{modal}", "data-toggle" => 'modal' %>
 <% end %>
   </p>
-  <p class="wind-speed"><%= number_with_precision wx.wind_speed/1000*3600, :precision => 1 %> km/h</p>
+  <p class="wind-speed"><% if not wx.wind_speed.nil? %><%= number_with_precision wx.wind_speed/1000*3600, :precision => 1 %><% else %>0.0<% end %> km/h</p>
   <%= link_to retina_image_tag('nasa-logo.png', :size => "75x64", :alt => "NASA", :title => "NASA"), 'http://spaceappschallenge.org' %>
   <p class="data-feed"><%= link_to 'Data feed', wx.url, :target => '_blank' %></p>
 </div>
