@@ -70,6 +70,7 @@ GEM
     mime-types (1.22)
     modernizr-rails (2.6.2.1)
     multi_json (1.7.2)
+    newrelic_rpm (3.6.3.104)
     nokogiri (1.5.9)
     pg (0.15.1)
     polyglot (0.3.3)
@@ -150,6 +151,7 @@ DEPENDENCIES
   less-rails
   meta-tags
   modernizr-rails
+  newrelic_rpm
   nokogiri
   pg
   rails (= 3.2.13)

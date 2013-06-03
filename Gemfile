@@ -26,6 +26,9 @@ gem 'meta-tags', :require => 'meta_tags'
 # gem 'geokit-rails'
 gem 'geokit-rails3'
 
+# New Relic for server information https://devcenter.heroku.com/articles/newrelic
+gem 'newrelic_rpm'
+
 # TODO: Globe
 # https://github.com/bogwro/cesium
 # gem 'cesium'
