@@ -1,7 +1,7 @@
 require 'open-uri'
 
 # require 'rmagick'
-require 'debugger'
+# require 'debugger'
 
 class HomeController < ApplicationController
   def index
@@ -62,9 +62,9 @@ class HomeController < ApplicationController
 
     min = gwr.weather_reports.min{|a,b| a.minimum_temperature <=> b.minimum_temperature}
     max = gwr.weather_reports.max{|a,b| a.maximum_temperature <=> b.maximum_temperature}
-    # debugger
-    @closest_wx = gwr.weather_reports.sort_by{|r| (celcius_to_kelvin(r.maximum_temperature)-@mars_wx.maximum_temperature).abs}.first
-    # debugger
+    # byebug
+    @closest_wx = gwr.weather_reports.sort_by{|r| (r.maximum_temperature-@mars_wx.maximum_temperature).abs}.first
+    # byebug
   end
 
   def localwx
@@ -77,7 +77,7 @@ class HomeController < ApplicationController
       latitude = params[:latitude]
     end
     openweather_result = open("http://api.openweathermap.org/data/2.5/weather?lat=#{latitude}&lon=#{longitude}&appid=#{ENV['OPENWEATHERMAP_API']}").read
-    # debugger
+    # byebug
     @local_wx = WeatherReport.build_from_hash(JSON.parse(openweather_result))
     @local_wx.maximum_temperature = kelvin_to_celcius(@local_wx.maximum_temperature)
     render :partial => "wx", :locals => {:wx => @local_wx, :modal => "localModal", :name => "local", :displayName => "Local"}

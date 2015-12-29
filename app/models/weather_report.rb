@@ -3,7 +3,7 @@ class WeatherReport < ActiveRecord::Base
 
   belongs_to :global_weather_report
 
-  require 'debugger'
+  # require 'debugger'
 
   def self.celcius_to_kelvin(celcius)
     return celcius+273.15
