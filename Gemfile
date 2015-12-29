@@ -14,6 +14,10 @@ group :development do
   gem 'byebug'
 end
 
+group :production do
+	gem 'rails_12factor'
+end
+
 # Environment variables
 gem 'figaro'
 
