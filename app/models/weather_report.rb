@@ -1,7 +1,9 @@
 class WeatherReport < ActiveRecord::Base
   attr_accessible :description, :latitude, :longitude, :maximum_temperature, :minimum_temperature, :name, :pressure, :sunrise, :sunset, :wind_direction, :wind_speed, :url, :current_temperature
 
-  belongs_to :global_weather_report  
+  belongs_to :global_weather_report
+
+  require 'debugger'
 
   def self.celcius_to_kelvin(celcius)
     return celcius+273.15
@@ -47,17 +49,17 @@ class WeatherReport < ActiveRecord::Base
 
   # json hash from openweathermap.com
   def self.build_from_hash(city)
- 
+    # debugger
     WeatherReport.new(
       description: city["weather"].first["description"],
       name: city["name"],
       latitude: city["coord"]["lat"],
       longitude: city["coord"]["lon"],
-      current_temperature: city["main"]["temp"],
-      maximum_temperature: city["main"]["temp_max"],
-      minimum_temperature: city["main"]["temp_min"],
+      current_temperature: celcius_to_kelvin(city["main"]["temp"]),
+      maximum_temperature: celcius_to_kelvin(city["main"]["temp_max"]),
+      minimum_temperature: celcius_to_kelvin(city["main"]["temp_min"]),
       wind_speed: city["wind"]["speed"]*1000/3600,
-      wind_direction: city["wind"]["direction"],
+      wind_direction: city["wind"]["deg"],
       pressure: city["main"]["pressure"],
       url: "http://openweathermap.org/city/%s" % city["id"]
     )

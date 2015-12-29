@@ -7,6 +7,14 @@ gem 'rails', '3.2.13'
 
 # gem 'sqlite3'
 
+group :development do
+  gem 'better_errors', '1.1.0'
+  gem 'debugger'
+end
+
+# Environment variables
+gem 'figaro'
+
 # Postgres gem
 gem 'pg'
 
@@ -24,7 +32,7 @@ gem 'meta-tags', :require => 'meta_tags'
 
 # Geokit-rails for location https://github.com/imajes/geokit-rails
 # gem 'geokit-rails'
-gem 'geokit-rails3'
+gem 'geokit-rails'
 
 # New Relic for server information https://devcenter.heroku.com/articles/newrelic
 gem 'newrelic_rpm'
@@ -43,14 +51,14 @@ gem 'retina_image_tag', '>= 1.0.2'
 
 # Twitter Bootstrap Rails gem
 gem "therubyracer"
-gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem "twitter-bootstrap-rails"
+gem "less-rails", '2.3.3' #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails", '2.2.6'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails',   '3.2.3'
+  gem 'coffee-rails', '3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby

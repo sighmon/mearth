@@ -1,12 +1,17 @@
 require 'open-uri'
 
-require 'RMagick'
+# require 'rmagick'
+require 'debugger'
 
 class HomeController < ApplicationController
   def index
 
     def celcius_to_kelvin(celcius)
       return celcius+273.15
+    end
+
+    def kelvin_to_celcius(kelvin)
+      return kelvin-273.15
     end
 
     def get_mars_wx
@@ -23,7 +28,7 @@ class HomeController < ApplicationController
 
     def get_cities_wx
       Rails.cache.fetch("cities_wx",:expires_in => 5.minutes) do
-        open("http://openweathermap.org/data/2.1/find/city?format=json&bbox=-180,-90,180,90").read
+        open("http://api.openweathermap.org/data/2.5/box/city?bbox=-180,-90,180,90&cluster=yes&appid=#{ENV['OPENWEATHERMAP_API']}").read
       end
     end
 
@@ -57,9 +62,9 @@ class HomeController < ApplicationController
 
     min = gwr.weather_reports.min{|a,b| a.minimum_temperature <=> b.minimum_temperature}
     max = gwr.weather_reports.max{|a,b| a.maximum_temperature <=> b.maximum_temperature}
-
-    @closest_wx = gwr.weather_reports.sort_by{|r| (r.maximum_temperature-@mars_wx.maximum_temperature).abs}.first
-  
+    # debugger
+    @closest_wx = gwr.weather_reports.sort_by{|r| (celcius_to_kelvin(r.maximum_temperature)-@mars_wx.maximum_temperature).abs}.first
+    # debugger
   end
 
   def localwx
@@ -71,8 +76,10 @@ class HomeController < ApplicationController
       longitude = params[:longitude]
       latitude = params[:latitude]
     end
-    openweather_result = open("http://api.openweathermap.org/data/2.1/find/city?lat=#{latitude}&lon=#{longitude}&cnt=1").read
-    @local_wx = WeatherReport.build_from_hash(JSON.parse(openweather_result)["list"].first)
+    openweather_result = open("http://api.openweathermap.org/data/2.5/weather?lat=#{latitude}&lon=#{longitude}&appid=#{ENV['OPENWEATHERMAP_API']}").read
+    # debugger
+    @local_wx = WeatherReport.build_from_hash(JSON.parse(openweather_result))
+    @local_wx.maximum_temperature = kelvin_to_celcius(@local_wx.maximum_temperature)
     render :partial => "wx", :locals => {:wx => @local_wx, :modal => "localModal", :name => "local", :displayName => "Local"}
   end
 
