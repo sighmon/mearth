@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.4.2'
+ruby '2.6.2'
 
 gem 'rails', '3.2.22.5'
 
@@ -22,7 +22,7 @@ end
 gem 'figaro'
 
 # Postgres gem
-gem 'pg'
+gem 'pg', '~> 0.18'
 
 # for generating debug image
 gem 'rmagick', :require => false
@@ -34,7 +34,7 @@ gem 'nokogiri'
 gem 'google-analytics-rails'
 
 # Using meta-tags for head meta https://github.com/kpumuk/meta-tags
-gem 'meta-tags', :require => 'meta_tags'
+gem 'meta-tags', '2.3.1'
 
 # Geokit-rails for location https://github.com/imajes/geokit-rails
 # gem 'geokit-rails'

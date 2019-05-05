@@ -22,7 +22,28 @@ class HomeController < ApplicationController
 
     def get_maas_wx
       Rails.cache.fetch("maas_wx",:expires_in => 5.minutes) do
-        open("http://marsweather.ingenology.com/v1/latest/").read
+        begin
+          open("http://marsweather.ingenology.com/v1/latest/").read
+        rescue => exception
+          return {
+            "report": {
+              "terrestrial_date": "2013-12-10", 
+              "sol": 155, 
+              "ls": 243.7, 
+              "min_temp": -64.45, 
+              "max_temp": 2.15, 
+              "pressure": 9.175, 
+              "pressure_string": "Higher", 
+              "abs_humidity": nil, 
+              "wind_speed": 2.0, 
+              "wind_direction": "E", 
+              "atmo_opacity": "Sunny", 
+              "season": "Month 9", 
+              "sunrise": "2013-12-10T12:00:00Z", 
+              "sunset": "2013-12-10T23:00:00Z"
+            }
+          }.to_json
+        end
       end
     end
 
