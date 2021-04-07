@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.6.2'
+ruby '2.6.5'
 
 gem 'rails', '3.2.22.5'
 
@@ -53,7 +53,7 @@ gem 'newrelic_rpm'
 
 # RetinaImageTag for retina display support
 # https://github.com/ffaerber/retina_image_tag
-gem 'retina_image_tag', '>= 1.0.2'
+gem 'retina_image_tag', :git => 'https://github.com/sighmon/retina_image_tag.git'
 
 # Twitter Bootstrap Rails gem
 gem "therubyracer"
