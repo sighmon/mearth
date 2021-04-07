@@ -91,6 +91,7 @@ GEM
       racc (~> 1.4)
     pg (0.21.0)
     polyglot (0.3.5)
+    power_assert (2.0.0)
     racc (1.5.2)
     rack (1.4.7)
     rack-cache (1.12.1)
@@ -141,6 +142,8 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    test-unit (3.4.0)
+      power_assert
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -179,6 +182,7 @@ DEPENDENCIES
   retina_image_tag!
   rmagick
   sass-rails (= 3.2.3)
+  test-unit
   therubyracer
   twitter-bootstrap-rails (= 2.2.6)
   uglifier (>= 1.0.3)

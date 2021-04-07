@@ -49,7 +49,7 @@ class HomeController < ApplicationController
 
     def get_cities_wx
       Rails.cache.fetch("cities_wx",:expires_in => 5.minutes) do
-        open("http://api.openweathermap.org/data/2.5/box/city?bbox=-180,-90,180,90&cluster=yes&appid=#{ENV['OPENWEATHERMAP_API']}").read
+        open("http://api.openweathermap.org/data/2.5/box/city?bbox=12,42,15,37,50&cluster=yes&appid=#{ENV['OPENWEATHERMAP_API']}").read
       end
     end
 
